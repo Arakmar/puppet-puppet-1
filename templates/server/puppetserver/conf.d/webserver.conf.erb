@@ -20,16 +20,20 @@ webserver: {
     ssl-cert-chain: <%= @server_ssl_chain %>
 <%- end -%>
     idle-timeout-milliseconds: <%= @server_web_idle_timeout %>
+    <%- if @server_ssl_protocols -%>
     ssl-protocols: [
     <%- @server_ssl_protocols.each do |ssl_protocol| -%>
         <%= ssl_protocol %>,
     <%- end -%>
     ]
+    <%- end -%>
+    <%- if @server_cipher_suites -%>
     cipher-suites: [
     <%- @server_cipher_suites.each do |cipher_suite| -%>
         <%= cipher_suite %>,
     <%- end -%>
     ]
+    <%- end -%>
 <%- if @acceptor_threads -%>
     acceptor-threads: <%= @acceptor_threads %>
 <%- end -%>

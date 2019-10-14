@@ -79,19 +79,23 @@ jruby-puppet: {
 
 # settings related to HTTPS client requests made by Puppet Server
 http-client: {
+    <%- if @server_ssl_protocols -%>
     # A list of acceptable protocols for making HTTPS requests
     ssl-protocols: [
     <%- @server_ssl_protocols.each do |protocol| -%>
         <%= protocol %>,
     <%- end -%>
     ]
+    <%- end -%>
 
+    <%- if @server_cipher_suites -%>
     # A list of acceptable cipher suites for making HTTPS requests
     cipher-suites: [
     <%- @server_cipher_suites.each do |cipher| -%>
         <%= cipher %>,
     <%- end -%>
     ]
+    <%- end -%>
 
     # Whether to enable http-client metrics; defaults to 'true'.
     metrics-enabled: <%= @server_metrics %>
